@@ -1,6 +1,7 @@
 import React, { FunctionComponent } from 'react';
 import { Grid, Typography } from '@material-ui/core';
 import styled from 'styled-components';
+import { useTranslation } from 'react-i18next';
 import { Predictions as PredictionsDefinition } from '../../../definitions/types';
 
 interface PredictionsProps {
@@ -19,8 +20,12 @@ const Predictions: FunctionComponent<PredictionsProps> = ({
   predictions: {
     goals: { home, away },
     winner: { id, comment },
+    advice,
+    // eslint-disable-next-line camelcase
+    under_over,
   },
 }) => {
+  const { t } = useTranslation();
   return (
     <Grid container>
       <Container item>
@@ -39,6 +44,13 @@ const Predictions: FunctionComponent<PredictionsProps> = ({
         </Grid>
         <Grid item>
           <Typography variant="h6">{comment}</Typography>
+        </Grid>
+        <Grid item>
+          <Typography variant="h6">{advice}</Typography>
+        </Grid>
+        <Grid item>
+          {/* eslint-disable-next-line camelcase */}
+          <Typography variant="h6">{`${t('underOver')} ${under_over}`}</Typography>
         </Grid>
       </Container>
     </Grid>
